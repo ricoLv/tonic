@@ -35,6 +35,7 @@ impl Connection {
         C::Response: AsyncRead + AsyncWrite + HyperConnection + Unpin + Send + 'static,
     {
         let mut settings = Builder::new()
+            .pool_max_idle_per_host(0);
             .http2_initial_stream_window_size(endpoint.init_stream_window_size)
             .http2_initial_connection_window_size(endpoint.init_connection_window_size)
             .http2_only(true)
